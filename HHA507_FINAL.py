@@ -19,7 +19,6 @@ import os
 import glob 
 
 
-
 ## Step 2 - Upload the 3 primary csv files for data analysis 
 
 hospitaldf = pd.read_csv('https://raw.githubusercontent.com/hantswilliams/AHI_DataSci_507/main/Deployment_Streamlit/hospital_info.csv')
@@ -129,7 +128,6 @@ list (inpatientdf)
 outpatientdf2 = outpatientdf.dropna()
 
 inpatientdf2 = inpatientdf.dropna()
-
 
 ## The hospital dataset consists of numerous null values, so remove the nulls from the columns that will be used.
 ## Confirm that there are no more null values in the column by using the isn().sum() command. 
