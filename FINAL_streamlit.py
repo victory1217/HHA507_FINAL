@@ -8,7 +8,7 @@ Created on Tue Dec 14 18:23:34 2021
 
 ## Import needed packages 
 
-!pip install streamlit
+import streamlit as st
 import pandas as pd
 import numpy as np 
 import time
