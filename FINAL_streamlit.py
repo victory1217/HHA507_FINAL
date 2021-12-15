@@ -38,7 +38,7 @@ def load_outpatient():
 #     my_bar.progress(percent_complete + 1)
   
 st.title('HHA 507 - Final Assignment')
-st.write('Hello, *World!* :sunglasses:') 
+st.write('Victoria Rodriguez Silva :sunglasses:') 
 
 # Load the data:     
 hospitaldf = load_hospitals()
