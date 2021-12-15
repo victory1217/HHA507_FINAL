@@ -71,10 +71,11 @@ common_discharges = inpatient_ny.groupby('drg_definition')['total_discharges'].s
 st.header('Inpatient Discharges for New York')
 st.dataframe(common_discharges)
 
-# Show top 10 inpatient discharges
-top10 = common_discharges.head(10)
-st.header('Top 10 Inpatient Discharges')
-st.dataframe(top10)
+# Create a breakdown of the common outpatient services 
+outpatient_ny = outpatientdf[outpatientdf['provider_state'] == 'NY']
+outpatient_discharges = outpatient_ny.groupby('apc')['outpatient_services'].sum().reset_index()
+st.header('Outpatient Services for New York')
+st.dataframe(outpatient_discharges)
 
 st.subheader('Map of NY Hospital Locations')
 
