@@ -59,7 +59,6 @@ hospitals_ny = hospitaldf[hospitaldf['state'] == 'NY']
 st.header('Hospitals in New York Summary')
 st.dataframe(hospitals_ny)
 
-
 st.subheader('Map of NY Hospital Locations')
 
 hospitals_ny_gps = hospitals_ny['location'].str.strip('()').str.split(' ', expand=True).rename(columns={0: 'Point', 1:'lon', 2:'lat'}) 	
@@ -70,3 +69,9 @@ hospitals_ny_gps['lat'] = pd.to_numeric(hospitals_ny_gps['lat'])
 
 st.map(hospitals_ny_gps)
 
+
+# Generate a summary for Stony Brook 
+SBUinfo = hospitaldf[hospitaldf['hospital_name'] == 'SUNY/STONY BROOK UNIVERSITY HOSPITAL']
+
+st.header('Stony Brook University Comparison')
+st.dataframe(SBUinfo)
