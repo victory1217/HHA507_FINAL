@@ -8,6 +8,8 @@ Created on Tue Dec 14 18:23:34 2021
 
 ## Import needed packages 
 
+## Import needed packages 
+
 import streamlit as st
 import pandas as pd
 import numpy as np 
@@ -35,7 +37,7 @@ def load_outpatient():
 #     time.sleep(0.1)
 #     my_bar.progress(percent_complete + 1)
   
-
+st.title('HHA 507 - Final Assignment')
 st.write('Hello, *World!* :sunglasses:') 
 
 # Load the data:     
@@ -59,6 +61,13 @@ hospitals_ny = hospitaldf[hospitaldf['state'] == 'NY']
 st.header('Hospitals in New York Summary')
 st.dataframe(hospitals_ny)
 
+
+# Create a breakdown of the hospital types for New York
+table1 = hospitals_ny['hospital_type'].value_counts().reset_index()
+st.header('Hospital Types for New York')
+st.dataframe(table1)
+
+
 st.subheader('Map of NY Hospital Locations')
 
 hospitals_ny_gps = hospitals_ny['location'].str.strip('()').str.split(' ', expand=True).rename(columns={0: 'Point', 1:'lon', 2:'lat'}) 	
@@ -70,8 +79,11 @@ hospitals_ny_gps['lat'] = pd.to_numeric(hospitals_ny_gps['lat'])
 st.map(hospitals_ny_gps)
 
 
+
+
 # Generate a summary for Stony Brook 
 SBUinfo = hospitaldf[hospitaldf['hospital_name'] == 'SUNY/STONY BROOK UNIVERSITY HOSPITAL']
 
 st.header('Stony Brook University Comparison')
 st.dataframe(SBUinfo)
+st.markdown('In comparison to the other hospitals in New York')

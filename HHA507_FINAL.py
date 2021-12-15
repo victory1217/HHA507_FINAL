@@ -253,7 +253,7 @@ def load_outpatient():
 #     time.sleep(0.1)
 #     my_bar.progress(percent_complete + 1)
   
-
+st.title('HHA 507 - Final Assignment')
 st.write('Hello, *World!* :sunglasses:') 
 
 # Load the data:     
@@ -288,8 +288,11 @@ hospitals_ny_gps['lat'] = pd.to_numeric(hospitals_ny_gps['lat'])
 st.map(hospitals_ny_gps)
 
 
+
+
 # Generate a summary for Stony Brook 
 SBUinfo = hospitaldf[hospitaldf['hospital_name'] == 'SUNY/STONY BROOK UNIVERSITY HOSPITAL']
 
 st.header('Stony Brook University Comparison')
 st.dataframe(SBUinfo)
+st.markdown('In comparison to the other hospitals in New York')
