@@ -55,18 +55,26 @@ st.dataframe(load_inatpatient())
 st.header('Outpatient Data Preview')
 st.dataframe(load_outpatient() )
 
-
 # Create a unique dataframe for New York Hospitals 
 hospitals_ny = hospitaldf[hospitaldf['state'] == 'NY']
 st.header('Hospitals in New York Summary')
 st.dataframe(hospitals_ny)
-
 
 # Create a breakdown of the hospital types for New York
 table1 = hospitals_ny['hospital_type'].value_counts().reset_index()
 st.header('Hospital Types for New York')
 st.dataframe(table1)
 
+# Create a breakdown of the common inpatient discharges
+inpatient_ny = inpatientdf[inpatientdf['provider_state'] == 'NY']
+common_discharges = inpatient_ny.groupby('drg_definition')['total_discharges'].sum().reset_index()
+st.header('Inpatient Discharges for New York')
+st.dataframe(common_discharges)
+
+# Show top 10 inpatient discharges
+top10 = common_discharges.head(10)
+st.header('Top 10 Inpatient Discharges')
+st.dataframe(top10)
 
 st.subheader('Map of NY Hospital Locations')
 
@@ -77,8 +85,6 @@ hospitals_ny_gps['lon'] = pd.to_numeric(hospitals_ny_gps['lon'])
 hospitals_ny_gps['lat'] = pd.to_numeric(hospitals_ny_gps['lat'])
 
 st.map(hospitals_ny_gps)
-
-
 
 
 # Generate a summary for Stony Brook 

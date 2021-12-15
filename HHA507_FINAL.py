@@ -271,24 +271,18 @@ st.dataframe(load_inatpatient())
 st.header('Outpatient Data Preview')
 st.dataframe(load_outpatient() )
 
-
 # Create a unique dataframe for New York Hospitals 
 hospitals_ny = hospitaldf[hospitaldf['state'] == 'NY']
 st.header('Hospitals in New York Summary')
 st.dataframe(hospitals_ny)
 
 st.subheader('Map of NY Hospital Locations')
-
 hospitals_ny_gps = hospitals_ny['location'].str.strip('()').str.split(' ', expand=True).rename(columns={0: 'Point', 1:'lon', 2:'lat'}) 	
 hospitals_ny_gps['lon'] = hospitals_ny_gps['lon'].str.strip('(')
 hospitals_ny_gps = hospitals_ny_gps.dropna()
 hospitals_ny_gps['lon'] = pd.to_numeric(hospitals_ny_gps['lon'])
 hospitals_ny_gps['lat'] = pd.to_numeric(hospitals_ny_gps['lat'])
-
 st.map(hospitals_ny_gps)
-
-
-
 
 # Generate a summary for Stony Brook 
 SBUinfo = hospitaldf[hospitaldf['hospital_name'] == 'SUNY/STONY BROOK UNIVERSITY HOSPITAL']
