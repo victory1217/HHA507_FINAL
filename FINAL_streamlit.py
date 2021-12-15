@@ -8,7 +8,7 @@ Created on Tue Dec 14 18:23:34 2021
 
 ## Import needed packages 
 
-import streamlit as st
+!pip install streamlit
 import pandas as pd
 import numpy as np 
 import time
@@ -37,7 +37,11 @@ def load_outpatient():
   
 
 st.write('Hello, *World!* :sunglasses:') 
-  
+
+# Load the data:     
+hospitaldf = load_hospitals()
+inpatientdf = load_inatpatient()
+outpatientdf = load_outpatient()  
 
 # Preview the dataframes 
 st.header('Hospital Data Preview')
