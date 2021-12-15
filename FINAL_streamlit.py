@@ -57,13 +57,7 @@ st.dataframe(load_outpatient() )
 # Create a unique dataframe for New York Hospitals 
 hospitals_ny = hospitaldf[hospitaldf['state'] == 'NY']
 st.header('Hospitals in New York Summary')
-
-# Create a bar chart showing the common hospital types 
-st.subheader('Hospital Type - NY')
-bar1 = hospitals_ny['hospital_type'].value_counts().reset_index()
-st.dataframe(bar1)
-
-st.markdown('The majority of hospitals in NY are acute care, which includes our point of comparison, Stony Brook University Hospital.')
+st.dataframe(hospitals_ny)
 
 
 st.subheader('Map of NY Hospital Locations')
@@ -81,17 +75,29 @@ st.map(hospitals_ny_gps)
 inpatient_ny = inpatientdf[inpatientdf['provider_state'] == 'NY']
 outpatient_ny = outpatientdf[outpatientdf['provider_state'] == 'NY']
 
-
 inpatient_discharges = inpatient_ny.groupby('drg_definition')['total_discharges'].sum().reset_index()
 outpatient_discharges = outpatient_ny.groupby('apc_definition')['total_discharges'].sum().reset_index()
 
+st.header('Summary of Inpatient Discharge Levels')
+st.dataframe(inpatient_discharges)
 
 top10 = inpatient_discharges.head(10)
 bottom10 = inpatient_discharges.tail(10)
+st.header('Top 10 inpatient discharges')
+st.dataframe(top10)
+
+st.header('Bottom 10 inpatient discharges')
+st.dataframe(bottom10)
 
 
 top_10 = outpatient_discharges.head(10)
 bottom_10 = outpatient_discharges.tail(10)
+st.header('Top 10 outpatient discharges')
+st.dataframe(top_10)
+
+st.header('Botton 10 outpatient discharges')
+st.dataframe(bottom_10)
+
 
 st.header('Discharge Summary')
 st.dataframe(inpatient_discharges)
