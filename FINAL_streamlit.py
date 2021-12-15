@@ -45,13 +45,13 @@ outpatientdf = load_outpatient()
 
 # Preview the dataframes 
 st.header('Hospital Data Preview')
-st.dataframe(hospitaldf)
+st.dataframe(load_hospitals())
 
 st.header('Inpatient Data Preview')
-st.dataframe(inpatientdf)
+st.dataframe(load_inatpatient())
 
 st.header('Outpatient Data Preview')
-st.dataframe(outpatientdf)
+st.dataframe(load_outpatient() )
 
 
 # Create a pivot table 
