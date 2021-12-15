@@ -10,8 +10,7 @@ Created on Tue Dec 14 18:23:34 2021
 
 import streamlit as st
 import pandas as pd
-import numpy as np
-import plotly.figure_factory as ff 
+import numpy as np 
 import scipy 
 import time
 
