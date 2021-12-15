@@ -54,14 +54,9 @@ st.header('Outpatient Data Preview')
 st.dataframe(load_outpatient() )
 
 
-# Create a pivot table 
-st.subheader('Hospital Data Pivot Table')
-dataframe_pivot = hospitaldf.pivot_table(index=['state','city'],values=['hospital_overall_rating'],aggfunc='mean')
-st.dataframe(dataframe_pivot)
-st.markdown('Stony Brook University Hospital is ranked 4, so this provides perspective on how they compare to other hospitals.')
-
 # Create a unique dataframe for New York Hospitals 
 hospitals_ny = hospitaldf[hospitaldf['state'] == 'NY']
+st.header('Hospitals in New York Summary')
 
 # Create a bar chart showing the common hospital types 
 st.subheader('Hospital Type - NY')
