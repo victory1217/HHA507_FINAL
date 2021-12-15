@@ -64,33 +64,44 @@ st.dataframe(hospitals_ny)
 table1 = hospitals_ny['hospital_type'].value_counts().reset_index()
 st.header('Hospital Types for New York')
 st.dataframe(table1)
+st.markdown('Per the table above, you can see that the most popular hospital type in New York state is for acute care.')
+st.markdown('Stony Brook University Hospital also falls within this category.')
 
 # Create a breakdown of the common inpatient discharges
 inpatient_ny = inpatientdf[inpatientdf['provider_state'] == 'NY']
 common_discharges = inpatient_ny.groupby('drg_definition')['total_discharges'].sum().reset_index()
 st.header('Inpatient Discharges for New York')
 st.dataframe(common_discharges)
+st.markdown('Per the table above, you can see that the drg code with the highest number of discharges is 871 - SEPTICEMIA OR SEVERE SEPSIS W/O MV 96+ HOURS W MCC'.)
 
 # Create a breakdown of the common outpatient services 
 outpatient_ny = outpatientdf[outpatientdf['provider_state'] == 'NY']
 outpatient_discharges = outpatient_ny.groupby('apc')['outpatient_services'].sum().reset_index()
 st.header('Outpatient Services for New York')
 st.dataframe(outpatient_discharges)
+st.markdown('Per the table above, you can see that the apc code with the most outpatient services is 0634 - Hospital Clinic Visits.')
 
+# Create a unique dataframe for Stony Brook Inpatient info
+sb_inpatient = inpatientdf[inpatientdf['provider_id'] == 330393]
+sb_discharges = sb_inpatient.groupby('drg_definition')['total_discharges'].sum().rest_index()
+st.header('Inpatient Discharges for Stony Brook')
+st.dataframe(sb_discharges)
+
+# Create a unique dataframe for Stony Brook Outpatient info
+sb_outpatient = outpatientdf[outpatientdf['provider_id'] == 330393]
+sb_services = sb_outpatient.groupby('apc')['outpatient_services'].sum().rest_index()
+st.header('Outpatient Services for Stony Brook')
+st.dataframe(sb_services)
+
+
+
+# Map of New York Hospital locations 
 st.subheader('Map of NY Hospital Locations')
-
 hospitals_ny_gps = hospitals_ny['location'].str.strip('()').str.split(' ', expand=True).rename(columns={0: 'Point', 1:'lon', 2:'lat'}) 	
 hospitals_ny_gps['lon'] = hospitals_ny_gps['lon'].str.strip('(')
 hospitals_ny_gps = hospitals_ny_gps.dropna()
 hospitals_ny_gps['lon'] = pd.to_numeric(hospitals_ny_gps['lon'])
 hospitals_ny_gps['lat'] = pd.to_numeric(hospitals_ny_gps['lat'])
-
 st.map(hospitals_ny_gps)
 
 
-# Generate a summary for Stony Brook 
-SBUinfo = hospitaldf[hospitaldf['hospital_name'] == 'SUNY/STONY BROOK UNIVERSITY HOSPITAL']
-
-st.header('Stony Brook University Comparison')
-st.dataframe(SBUinfo)
-st.markdown('In comparison to the other hospitals in New York')
