@@ -72,7 +72,7 @@ inpatient_ny = inpatientdf[inpatientdf['provider_state'] == 'NY']
 common_discharges = inpatient_ny.groupby('drg_definition')['total_discharges'].sum().reset_index()
 st.header('Inpatient Discharges for New York')
 st.dataframe(common_discharges)
-st.markdown('Per the table above, you can see that the drg code with the highest number of discharges is 871 - SEPTICEMIA OR SEVERE SEPSIS W/O MV 96+ HOURS W MCC'.)
+st.markdown('Per the table above, you can see that the drg code with the highest number of discharges is 871 - SEPTICEMIA OR SEVERE SEPSIS W/O MV 96+ HOURS W MCC.')
 
 # Create a breakdown of the common outpatient services 
 outpatient_ny = outpatientdf[outpatientdf['provider_state'] == 'NY']
