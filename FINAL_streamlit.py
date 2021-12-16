@@ -86,7 +86,8 @@ sb_inpatient = inpatientdf[inpatientdf['provider_id']==330393]
 st.header('Inpatient Discharges for Stony Brook')
 st.dataframe(sb_inpatient)
 
-sb_discharges = sb_inpatient.pivot_table(index =['provider_name','drg_definition'],values =['total_discharges'],aggfunc='mean')
+sb_discharges = sb_inpatient.pivot_table(index =['drg_definition'],values =['total_discharges'],aggfunc='mean')
+st.header('DRG vs Total Charges')
 st.dataframe(sb_discharges)
 
 # Create a unique dataframe for Stony Brook Outpatient info
