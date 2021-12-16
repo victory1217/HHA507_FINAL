@@ -83,17 +83,21 @@ st.markdown('Per the table above, you can see that the apc code with the most ou
 
 # Create a unique dataframe for Stony Brook Inpatient info
 sb_inpatient = inpatientdf[inpatientdf['provider_id']==330393]
-st.header('Inpatient Discharges for Stony Brook')
+st.header('Inpatient Data for Stony Brook')
 st.dataframe(sb_inpatient)
 
-sb_discharges = sb_inpatient.pivot_table(index =['provider_name', 'drg_definition'],values =['total_discharges'],aggfunc='mean')
-st.header('DRG vs Total Charges')
+sb_discharges = sb_inpatient.pivot_table(index =['drg_definition'],values =['total_discharges'],aggfunc='mean')
+st.header('Total Discharges for DRG Codes at Stony Brook')
 st.dataframe(sb_discharges)
 
 # Create a unique dataframe for Stony Brook Outpatient info
 sb_outpatient = outpatientdf[outpatientdf['provider_id']==330393]
-st.header('Outpatient Services for Stony Brook')
+st.header('Outpatient Data for Stony Brook')
 st.dataframe(sb_outpatient) 
+
+sb_services = sb_outpatient.pivot_table(index =['apc'],values=['outpatient_services'],aggfunc='mean')
+st.header('Total Outpatient Services for APC Codes at Stony Brook')
+st.dataframe(sb_services)
 
 
 
@@ -106,6 +110,3 @@ hospitals_ny_gps['lon'] = pd.to_numeric(hospitals_ny_gps['lon'])
 hospitals_ny_gps['lat'] = pd.to_numeric(hospitals_ny_gps['lat'])
 st.map(hospitals_ny_gps)
 
-
-sb_discharges = sb_inpatient.pivot_table(index =['provider_name','drg_definition'],values =['total_discharges'],aggfunc='mean')
-sb_services = sb_outpatient.pivot_table(index =['provider_name','apc'],values=['outpatient_services'],aggfunc='mean')
