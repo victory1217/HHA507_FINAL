@@ -47,17 +47,22 @@ outpatientdf = load_outpatient()
 
 # Preview the dataframes 
 st.header('Hospital Data Preview')
+st.markdown('This dataset consists of 5,314 hospitals in the United States. Each row represents a unique hospital, referenced by "provider_id", and additional info for each location.')
 st.dataframe(load_hospitals())
 
 st.header('Inpatient Data Preview')
+st.markdown('This dataset consists of drg codes for multiple inpatient locations. Each row represents a unique drg code, referenced by "drg_definition", along with payment details for each code.')
+## Also, includes averages for charges, total payments, and medicare payments. ')
 st.dataframe(load_inatpatient())
 
 st.header('Outpatient Data Preview')
+st.markdown('This dataset consists of apc codes for multiple outpatient locations. Each row represents a unique apc code, referenced by "apc", along with service and payment details for each code.')
 st.dataframe(load_outpatient() )
 
 # Create a unique dataframe for New York Hospitals 
 hospitals_ny = hospitaldf[hospitaldf['state'] == 'NY']
 st.header('Hospitals in New York Summary')
+st.markdown('This dataset filters out hospitals located in New York from the main hospital dataframe')
 st.dataframe(hospitals_ny)
 
 # Create a breakdown of the hospital types for New York
@@ -85,20 +90,28 @@ st.markdown('Per the table above, you can see that the apc code with the most ou
 sb_inpatient = inpatientdf[inpatientdf['provider_id']==330393]
 st.header('Inpatient Data for Stony Brook')
 st.dataframe(sb_inpatient)
+st.markdown('This dataset filters out inpatient data for Stony Brook University Hospital from the main inpatient dataframe')
 
 sb_discharges = sb_inpatient.pivot_table(index =['drg_definition'],values =['total_discharges'],aggfunc='mean')
 st.header('Total Discharges for DRG Codes at Stony Brook')
 st.dataframe(sb_discharges)
+st.markdown('This pivot table shows the total discharges per drg code for Stony Brook University Hospital.')
+st.markdown('Per the table above, you can see that the highest amount of discharges came from drg code 871 - SEPTICEMIA OR SEVERE SEPSIS W/O MV 96+ HOURS W MCC.')
+st.markdown('In comparison to the cumulative inpatient discharge data for all of New York, Stony Brook University Hospital shares the same drg code with the most discharges.')
 
 # Create a unique dataframe for Stony Brook Outpatient info
 sb_outpatient = outpatientdf[outpatientdf['provider_id']==330393]
 st.header('Outpatient Data for Stony Brook')
 st.dataframe(sb_outpatient) 
+st.markdown('This dataset filters out outpatient data for Stony Brook University Hospital from the main outpatient dataframe')
+
 
 sb_services = sb_outpatient.pivot_table(index =['apc'],values=['outpatient_services'],aggfunc='mean')
 st.header('Total Outpatient Services for APC Codes at Stony Brook')
 st.dataframe(sb_services)
-
+st.markdown('This pivot table shows the number of outpatient services per apc code for Stony Brook University Hospital')
+st.markdown('Per the table above, you can see that the apc cde with the largest amount of services is 0269 - Level I Echocardiogram Without Contrast.')
+st.markdown('In comparison to the cumulative outpatient data for all of New York, where apc code 0634 - Hospital Clinic Visits was the service with the most services.')
 
 
 # Map of New York Hospital locations 
