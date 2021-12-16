@@ -84,7 +84,7 @@ st.markdown('Per the table above, you can see that the apc code with the most ou
 # Create a unique dataframe for Stony Brook Inpatient info
 sb_inpatient = inpatientdf[inpatientdf['provider_id']=='330393']
 sb_discharges = sb_inpatient.pivot_table(index =['provider_name','drg_definition'],values = ['total_discharges'],aggfunc='mean')
-sb_discharges['total_discharges'] = sb_discharges['total_discharges'].astype('int64')
+sb_discharges['drg_definition'] = sb_discharges['drg_definition'].astype('int64')
 st.header('Inpatient Discharges for Stony Brook')
 st.dataframe(sb_discharges)
 
