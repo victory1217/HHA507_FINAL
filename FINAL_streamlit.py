@@ -82,14 +82,14 @@ st.dataframe(outpatient_discharges)
 st.markdown('Per the table above, you can see that the apc code with the most outpatient services is 0634 - Hospital Clinic Visits.')
 
 # Create a unique dataframe for Stony Brook Inpatient info
-sb_inpatient = inpatientdf[inpatientdf['provider_id'] == '330393']
-sb_discharges = sb_inpatient.pivot_table(index = ['provider_name', 'drg_definition'], values = ['total_discharges'], aggfunc='mean')
+sb_inpatient = inpatientdf[inpatientdf['provider_id']=='330393']
+sb_discharges = sb_inpatient.pivot_table(index =['provider_name','drg_definition'],values = ['total_discharges'],aggfunc='mean')
 st.header('Inpatient Discharges for Stony Brook')
 st.dataframe(sb_discharges)
 
 # Create a unique dataframe for Stony Brook Outpatient info
-sb_outpatient = outpatientdf[outpatientdf['provider_id'] == '330393']
-sb_services = sb_outpatient.pivot_table(index = ['provider_name', 'apc'], values = ['outpatient_services'], aggfunc='mean')
+sb_outpatient = outpatientdf[outpatientdf['provider_id']=='330393']
+sb_services = sb_outpatient.pivot_table(index =['provider_name','apc'],values=['outpatient_services'],aggfunc='mean')
 st.header('Outpatient Services for Stony Brook')
 st.dataframe(sb_services)
 
