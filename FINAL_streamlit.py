@@ -84,12 +84,12 @@ st.markdown('Per the table above, you can see that the apc code with the most ou
 # Create a unique dataframe for Stony Brook Inpatient info
 sb_inpatient = inpatientdf[inpatientdf['provider_id']=='330393']
 st.header('Inpatient Discharges for Stony Brook')
-st.dataframe(sb_discharges)
+st.dataframe(sb_inpatient)
 
 # Create a unique dataframe for Stony Brook Outpatient info
 sb_outpatient = outpatientdf[outpatientdf['provider_id']=='330393']
 st.header('Outpatient Services for Stony Brook')
-st.dataframe(sb_services)
+st.dataframe(sb_outpatient)
 
 
 
